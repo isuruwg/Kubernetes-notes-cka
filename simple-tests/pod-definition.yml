@@ -9,3 +9,6 @@ spec: # This is a dictionary
   containers: # This is a list/array
     - name: nginx-container
       image: nginx
+      
+    - name: backend-container
+      image: redis
