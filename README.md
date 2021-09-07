@@ -8,9 +8,13 @@
   - [1.5. Other components](#15-other-components)
   - [1.6. Master vs Worker Nodes](#16-master-vs-worker-nodes)
 - [2. Core concepts](#2-core-concepts)
-  - [Example pod definition](#example-pod-definition)
-- [3. Exam registration](#3-exam-registration)
-- [4. References](#4-references)
+  - [2.1. Example pod definition](#21-example-pod-definition)
+- [3. Tips for exam](#3-tips-for-exam)
+  - [3.1. Use tmux](#31-use-tmux)
+    - [3.1.1. Setup tmux](#311-setup-tmux)
+    - [3.1.2. Common tmux commands](#312-common-tmux-commands)
+- [4. Exam registration](#4-exam-registration)
+- [5. References](#5-references)
 
 # 1. Introduction
 
@@ -94,7 +98,7 @@ Some example values for `kind` and `apiVersion` fields:
 | ReplicaSet | apps/v1 |
 | Deployment | apps/v1 |
 
-## Example pod definition
+## 2.1. Example pod definition
 
 ```yaml
 apiVersion: v1
@@ -114,12 +118,84 @@ Once this file is created and saved [pod-definition.yml](simple-tests/pod-defini
 
 You can get a list of running pods by doing `kubectl get pods` and get a detailed description of the pod by doing `kubectl describe pod myapp-pod`. 
 
+# 3. Tips for exam
 
-# 3. Exam registration
+## 3.1. Use tmux
+
+[tmux](https://github.com/tmux/tmux) comes pre-installed during the exam. 
+
+For preparing for the exam, you can install using `sudo apt install tmux` [[ref](https://github.com/tmux/tmux/wiki/Installing)]
+
+### 3.1.1. Setup tmux
+
+```bash
+# create ~/.tmux.conf
+vi ~/.tmux.conf
+```
+
+Add the following to the `tmux.conf` file: 
+
+```conf
+# To enable mouse scroll in tmux pane
+set -g mouse on
+
+# Improve colors
+set -g default-terminal 'screen-256color'
+
+# Set scrollback buffer to 10000
+set -g history-limit 10000
+
+# Customize the status line
+set -g status-fg  green
+set -g status-bg  black
+
+# Change the default prefix from C-b to C-z
+# set -g prefix C-z
+# unbind C-b
+```
+
+### 3.1.2. Common tmux commands
+
+```bash
+# starting session 
+tmux
+
+# split pane horizontally
+(Ctrl+b) + %
+# Press Ctrl+b together -> let go of the two keys -> press %
+
+# Split pane vertically
+(Ctrl+b) + "
+```
+```bash
+# move between different windows
+(Ctrl+b) + Arrow keys 
+
+# Closing panes
+# type exit or do: 
+Ctrl+d
+
+# Creating new windows:
+(Ctrl+b)+c
+
+# Switch to previous window
+(Ctrl+b)+p
+
+# Switch to next window
+(Ctrl+b)+n
+
+# Detach current session (detaching a session will leave what you're doing still running in the background)
+(Ctrl+b)+d
+
+# Pick which session to detach
+(Ctrl+b)+D
+```
+
+# 4. Exam registration
 
 **Check lecture 5 for a discount code for 15% discount when registering for the CKAD or CKA exams**
 
-# 4. References
+# 5. References
 
 1 [CKA with practice tests - Udemy](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests)
 
