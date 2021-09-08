@@ -24,7 +24,7 @@ This repo contains my notes and experiments for the CKA and CKAD exams.
 
 The course notes from the [Udemy CKA course](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests) is available as a Git submodule in this repo.
 
-This Git submodule is a fork from https://github.com/kodekloudhub/certified-kubernetes-administrator-course which I have slightly changed with my own notes.
+This Git submodule is a fork from [this repo](https://github.com/kodekloudhub/certified-kubernetes-administrator-course) which I have slightly changed with my own notes.
 
 ## 1.2. Nodes (Minions)
 
@@ -189,6 +189,33 @@ Ctrl+d
 
 # Pick which session to detach
 (Ctrl+b)+D
+
+# view sessions
+tmux ls
+
+# attach session
+# The 0 here would be the session name (the part before the colon in tmux ls)
+tmux attach-session -t 0
+
+# Create session with name
+tmux new -s session_name
+```
+
+Some other window and pane shortcuts
+
+```bash
+Ctrl+b c # Create a new window (with shell)
+Ctrl+b w # Choose window from a list
+Ctrl+b 0 # Switch to window 0 (by number )
+Ctrl+b , # Rename the current window
+Ctrl+b % # Split current pane horizontally into two panes
+# Split current pane vertically into two panes
+Ctrl+b " 
+```
+```bash
+Ctrl+b o # Go to the next pane
+Ctrl+b ; # Toggle between the current and previous pane
+Ctrl+b x # Close the current pane
 ```
 
 # 4. Exam registration
