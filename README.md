@@ -13,6 +13,8 @@
   - [3.1. Use tmux](#31-use-tmux)
     - [3.1.1. Setup tmux](#311-setup-tmux)
     - [3.1.2. Common tmux commands](#312-common-tmux-commands)
+  - [3.2. Using kubectl run to generate YAML files](#32-using-kubectl-run-to-generate-yaml-files)
+  - [3.3. Bookmarks for exam](#33-bookmarks-for-exam)
 - [4. Exam registration](#4-exam-registration)
 - [5. References](#5-references)
 
@@ -217,6 +219,46 @@ Ctrl+b o # Go to the next pane
 Ctrl+b ; # Toggle between the current and previous pane
 Ctrl+b x # Close the current pane
 ```
+
+## 3.2. Using kubectl run to generate YAML files
+
+[REF](https://kubernetes.io/docs/reference/kubectl/conventions/)
+
+```bash
+# Create an NGINX Pod
+
+kubectl run nginx --image=nginx
+
+# Generate POD Manifest YAML file (-o yaml). Don't create it(--dry-run)
+
+kubectl run nginx --image=nginx --dry-run=client -o yaml
+
+# Create a deployment
+
+kubectl create deployment --image=nginx nginx
+
+# Generate Deployment YAML file (-o yaml). Don't create it(--dry-run)
+
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+
+# Generate Deployment YAML file (-o yaml). Don't create it(--dry-run) with 4 Replicas (--replicas=4)
+
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml > nginx-deployment.yaml
+
+# Save it to a file, make necessary changes to the file (for example, adding more replicas) and then create the deployment.
+
+kubectl create -f nginx-deployment.yaml
+
+# OR
+
+# In k8s version 1.19+, we can specify the --replicas option to create a deployment with 4 replicas.
+
+kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
+```
+
+## 3.3. Bookmarks for exam
+
+https://kubernetes.io/docs/reference/kubectl/conventions/
 
 # 4. Exam registration
 
