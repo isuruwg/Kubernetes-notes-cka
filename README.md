@@ -255,6 +255,12 @@ kubectl create -f nginx-deployment.yaml
 
 kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
 ```
+`--dry-run`: By default as soon as the command is run, the resource will be created. If you simply want to test your command , use the `--dry-run=client` option. This will not create the resource, instead, tell you whether the resource can be created and if your command is right.
+
+`-o yaml`: This will output the resource definition in YAML format on screen.
+
+More info can be also found in [this lecture note](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/learn/lecture/15018998#overview)
+
 
 ## 3.3. Bookmarks for exam
 
