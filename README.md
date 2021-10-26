@@ -1,12 +1,16 @@
 # TOC <!-- omit in toc -->
 
 - [1. Introduction](#1-introduction)
-  - [1.1. Course notes from Udemy course](#11-course-notes-from-udemy-course)
-  - [1.2. Nodes (Minions)](#12-nodes-minions)
-  - [1.3. Cluster](#13-cluster)
-  - [1.4. Master](#14-master)
-  - [1.5. Other components](#15-other-components)
-  - [1.6. Master vs Worker Nodes](#16-master-vs-worker-nodes)
+  - [1.1. Installing for local development](#11-installing-for-local-development)
+    - [1.1.1. Install Docker in rootless mode](#111-install-docker-in-rootless-mode)
+    - [1.1.2. Install Kubectl](#112-install-kubectl)
+    - [1.1.3. Install KIND](#113-install-kind)
+  - [1.2. Course notes from Udemy course](#12-course-notes-from-udemy-course)
+  - [1.3. Nodes (Minions)](#13-nodes-minions)
+  - [1.4. Cluster](#14-cluster)
+  - [1.5. Master](#15-master)
+  - [1.6. Other components](#16-other-components)
+  - [1.7. Master vs Worker Nodes](#17-master-vs-worker-nodes)
 - [2. Core concepts](#2-core-concepts)
   - [2.1. Example pod definition](#21-example-pod-definition)
 - [3. Tips for exam](#3-tips-for-exam)
@@ -22,26 +26,72 @@
 
 This repo contains my notes and experiments for the CKA and CKAD exams.
 
-## 1.1. Course notes from Udemy course
+## 1.1. Installing for local development
+
+There are [multiple ways](https://brennerm.github.io/posts/minikube-vs-kind-vs-k3s.html) to install Kuberenetes locally for development. Here, I'll use [KIND](https://kind.sigs.k8s.io/docs/user/quick-start/). 
+
+### 1.1.1. Install Docker in rootless mode
+
+TODO: https://docs.docker.com/engine/security/rootless/
+
+### 1.1.2. Install Kubectl
+
+Follow [Install using native package management](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management). 
+
+(There's a snap install option too, and as of 2021-10-07 snap install seems to also install the latest version. However, I used the apt method)
+
+
+### 1.1.3. Install KIND
+
+TODO###############################################
+
+WAIT: Explore [Install K8S with Vagrant and Ansible](https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/) and/or [Install K8S with Kubesprey](https://kubernetes.io/docs/setup/production-environment/tools/kubespray/)
+
+THIS HAS BEEN MOVED TO PC SETUP REPO AT : https://github.com/isuruwg/pc-setup ####################################################################################
+
+[REF](https://kind.sigs.k8s.io/docs/user/quick-start/)
+
+```bash
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+chmod +x ./kind
+mkdir -p ~/KIND/kind_0_11_1/
+mv ./kind ~/KIND/kind_0_11_1/
+```
+
+Add the following to the `~/.bashrc` (on Ubuntu) to add KIND to your path.
+
+```bash
+export PATH="~/KIND/kind_0_11_1:$PATH"
+```
+Create cluster (The default cluster is named kind): 
+
+```bash
+kind create cluster
+```
+
+If you want to delete a cluster use `kind delete cluster` command.
+
+
+## 1.2. Course notes from Udemy course
 
 The course notes from the [Udemy CKA course](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests) is available as a Git submodule in this repo.
 
 This Git submodule is a fork from [this repo](https://github.com/kodekloudhub/certified-kubernetes-administrator-course) which I have slightly changed with my own notes.
 
-## 1.2. Nodes (Minions)
+## 1.3. Nodes (Minions)
 
 Nodes are machines where Kubernetes is installed in. 
 
-## 1.3. Cluster
+## 1.4. Cluster
 
 A cluster is a set of nodes grouped together
 
-## 1.4. Master
+## 1.5. Master
 
 The master is another node with Kubernetes installed in it, and configured as a Master. The master watches
 over the nodes in the cluster and is responsible for the actual orchestration of containers on the worker nodes.
 
-## 1.5. Other components
+## 1.6. Other components
 
   ![Kubernetes Architecture](certified-kubernetes-administrator-course/images/k8s-arch.PNG)
   
@@ -70,7 +120,7 @@ When you install Kubernetes on a system, you are actually installing the followi
 
 **Kube-proxy:** This takes care of networking within Kubernetes. This allows containers to communicate with each other.
 
-## 1.6. Master vs Worker Nodes
+## 1.7. Master vs Worker Nodes
 
 - Master has the kube-apiserver which makes it the master
 - Workers have Kubelet which communicates with the kube-apiserver
