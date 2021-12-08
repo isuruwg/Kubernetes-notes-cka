@@ -17,7 +17,8 @@
   - [3.1. Use tmux](#31-use-tmux)
     - [3.1.1. Setup tmux](#311-setup-tmux)
     - [3.1.2. Common tmux commands](#312-common-tmux-commands)
-  - [3.2. Using kubectl run to generate YAML files](#32-using-kubectl-run-to-generate-yaml-files)
+  - [3.2. Using kubectl to generate YAML files](#32-using-kubectl-to-generate-yaml-files)
+  - [Using kubectl explain](#using-kubectl-explain)
   - [3.3. Bookmarks for exam](#33-bookmarks-for-exam)
 - [4. Exam registration](#4-exam-registration)
 - [5. References](#5-references)
@@ -270,7 +271,7 @@ Ctrl+b ; # Toggle between the current and previous pane
 Ctrl+b x # Close the current pane
 ```
 
-## 3.2. Using kubectl run to generate YAML files
+## 3.2. Using kubectl to generate YAML files
 
 [REF](https://kubernetes.io/docs/reference/kubectl/conventions/)
 
@@ -279,9 +280,12 @@ Ctrl+b x # Close the current pane
 
 kubectl run nginx --image=nginx
 
-# Generate POD Manifest YAML file (-o yaml). Don't create it(--dry-run)
+# Generate POD Manifest YAML file (-o yaml). Don't create it in the system (--dry-run=client)
 
 kubectl run nginx --image=nginx --dry-run=client -o yaml
+
+# you can use restart=Never flag to make sure what's created by this command is a pod
+kubectl run yellow --image=busybox --restart=Never --dry-run=client -o yaml > pod.yaml
 
 # Create a deployment
 
@@ -311,6 +315,25 @@ kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o y
 
 More info can be also found in [this lecture note](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/learn/lecture/15018998#overview)
 
+You can also get the specification of a currently running pod into a yaml file by doing: `kubectl get pod app -o yaml > app.yaml`
+
+## Using kubectl explain
+
+You can use the `kubectl explain` command to get example yaml snippets. 
+
+eg: 
+
+```bash
+kubectl explain pods --recursive | less
+
+# after this is displayed, you can search for things using the forward slash(/). 
+
+# You can also use the grep command
+kubectl explain ppods --recursive | grep -A8 envFrom
+# The above command displays 8 lines after envFrom
+```
+
+You can check [here](https://gist.github.com/glnds/8862214) for a cheatsheet of the `less` command.
 
 ## 3.3. Bookmarks for exam
 
